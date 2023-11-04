@@ -1,6 +1,7 @@
 import asyncio
 
 from aiogram import Bot, Dispatcher, F
+from aiogram.filters.command import Command
 from aiogram.types import FSInputFile
 from aiogram.types import Message
 from yt_dlp import DownloadError
@@ -12,8 +13,15 @@ bot = Bot(token=config.TOKEN.get_secret_value(), parse_mode='html')
 dp = Dispatcher()
 
 
+@dp.message(Command('start'))
+async def greeting(message: Message):
+	await message.answer(
+		f'Привет, <b>{message.chat.first_name}</b>!\nОтправь мне ссылку на YouTube видео, а я тебе помогу скачать его!',
+		parse_mode='HTML')
+
+
 @dp.message(F.text)
-async def download_video(message: Message) -> None:
+async def download_video(message: Message):
 	try:
 		await message.answer('Пожалуйста подождите...')
 		video_info = download_video_api(message.text)
