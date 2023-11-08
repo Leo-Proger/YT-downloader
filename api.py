@@ -2,6 +2,12 @@ import os
 import re
 
 from yt_dlp import YoutubeDL
+from typing import Literal
+
+VIDEO_FORMATS = {
+	'normal': 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]/best',
+	'best': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+	}
 
 
 # TODO: Удалять файлы через некоторое время
@@ -20,11 +26,12 @@ def extract_video_id(url):
 
 
 # TODO: Сделать асинхронным
-def download_video_api(url: str) -> dict:
+def download_video_api(url: str, quality: Literal['normal', 'best'] = 'normal') -> dict:
 	filename = extract_video_id(url)
+
 	ydl_opts: dict = {
-		'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
-		'outtmpl': f'Z:/videos/{filename}.%(ext)s',
+		'format': VIDEO_FORMATS[quality],
+		'outtmpl': f'Z:/videos/{filename}.mp4',
 		'noplaylist': True,
 		}
 

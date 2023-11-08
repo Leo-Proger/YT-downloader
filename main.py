@@ -1,4 +1,5 @@
 import asyncio
+import glob
 
 from aiogram import Bot, Dispatcher, F
 from aiogram.filters.command import Command
@@ -30,9 +31,11 @@ async def download_video(message: Message):
 		filename = video_info['filename']
 		author = video_info['author']
 		duration = video_info['duration']
-		print(title)
 
-		video = FSInputFile(rf'Z:\videos\{filename}.mp4')
+		matches = glob.glob(rf'Z:/videos/{filename}.*')
+		if matches:
+			video = FSInputFile(matches[0])
+
 		await bot.send_video(message.chat.id, video, caption=title)
 
 		send_text = f'<b>Название</b>: {title}\n<b>Канал</b>: {author}\n<b>Длительность</b>: {duration} секунд'
