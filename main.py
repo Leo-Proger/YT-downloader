@@ -27,10 +27,12 @@ async def download_video(message: Message):
 		video_info = download_video_api(message.text)
 
 		title = video_info['title']
+		filename = video_info['filename']
 		author = video_info['author']
 		duration = video_info['duration']
+		print(title)
 
-		video = FSInputFile(rf'Z:\videos\{title}.mp4')
+		video = FSInputFile(rf'Z:\videos\{filename}.mp4')
 		await bot.send_video(message.chat.id, video, caption=title)
 
 		send_text = f'<b>Название</b>: {title}\n<b>Канал</b>: {author}\n<b>Длительность</b>: {duration} секунд'
