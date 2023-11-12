@@ -1,12 +1,12 @@
 import os
 import re
-
-from yt_dlp import YoutubeDL
 from typing import Literal
 
+from yt_dlp import YoutubeDL
+
 VIDEO_FORMATS = {
-	'normal': 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]/best',
-	'best': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+	'До 1080p': 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]/best',
+	'Лучшее': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
 	}
 
 

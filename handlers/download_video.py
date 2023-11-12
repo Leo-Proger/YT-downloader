@@ -21,7 +21,7 @@ class Form(StatesGroup):
 
 
 @router.message(Form.quality)
-async def process_download_video(message: Message, state: FSMContext) -> None | str:
+async def process_download_video(message: Message, state: FSMContext):
 	try:
 		await state.update_data(quality=message.text)
 		print(await state.get_state())
