@@ -5,8 +5,8 @@ from typing import Literal
 from yt_dlp import YoutubeDL
 
 VIDEO_FORMATS = {
-	'До 1080p': 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]/best',
-	'Лучшее': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best',
+	'До 1080p': ['bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]/best', '_do1080p'],
+	'Лучшее': ['bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best', '_luchsheye'],
 	}
 
 
@@ -26,11 +26,12 @@ def extract_video_id(url):
 
 
 # TODO: Сделать асинхронным
-def download_video_api(url: str, quality: Literal['normal', 'best'] = 'normal') -> dict:
+def download_video_api(url: str) -> dict:
+	# filename = extract_video_id(url) + VIDEO_FORMATS[quality][1]
 	filename = extract_video_id(url)
 
 	ydl_opts: dict = {
-		'format': VIDEO_FORMATS[quality],
+		'format': 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]/best',
 		'outtmpl': f'Z:/videos/{filename}.mp4',
 		'noplaylist': True,
 		}
