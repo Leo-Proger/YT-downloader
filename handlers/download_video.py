@@ -34,7 +34,7 @@ async def process_download_video(message: Message, state: FSMContext):
 
 		title, filename, author, duration = (v := video_info)['title'], v['filename'], v['author'], v['duration']
 
-		matches = glob.glob(rf'Z:/videos/{filename}.*')
+		matches = glob.glob(rf'downloaded_videos/{filename}.*')
 		if matches:
 			video = FSInputFile(matches[0])
 			send_text = f'<b>Название</b>: {title}\n<b>Канал</b>: {author}\n<b>Длительность</b>: {duration} секунд(а)'
