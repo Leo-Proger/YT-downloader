@@ -1,4 +1,5 @@
 import glob
+import os
 
 from aiogram import Router, F
 from aiogram.exceptions import TelegramEntityTooLarge
@@ -42,6 +43,8 @@ async def process_download_video(message: Message, state: FSMContext):
 			await message.answer(send_text, parse_mode='HTML')
 
 			await state.clear()
+
+			os.remove(matches[0])
 		else:
 			await message.answer('Ошибка. Напишите пожалуйста разработчику [Leo Proger](https://t.me/Leo_Proger)',
 			                     parse_mode='MARKDOWN')
