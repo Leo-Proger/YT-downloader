@@ -34,6 +34,7 @@ def download_video_api(url: str) -> dict:
 		'format': 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]/best',
 		'outtmpl': f'Z:/videos/{filename}.mp4',
 		'noplaylist': True,
+		'max_filesize': 52428800,
 		}
 
 	with YoutubeDL(ydl_opts) as ydl:

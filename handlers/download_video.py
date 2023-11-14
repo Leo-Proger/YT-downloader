@@ -49,7 +49,7 @@ async def process_download_video(message: Message, state: FSMContext):
 		await message.answer('Видео не найдено')
 	except TelegramEntityTooLarge as e:
 		await message.answer(
-			'Видео слишком длинное или в большом разрешении.'
+			'Видео слишком длинное, я не могу его скачать('
 			)
 
 
