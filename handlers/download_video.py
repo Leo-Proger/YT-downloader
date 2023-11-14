@@ -37,7 +37,7 @@ async def process_download_video(message: Message, state: FSMContext):
 		matches = glob.glob(rf'Z:/videos/{filename}.*')
 		if matches:
 			video = FSInputFile(matches[0])
-			send_text = f'<b>Название</b>: {title}\n<b>Канал</b>: {author}\n<b>Длительность</b>: {duration} секунд'
+			send_text = f'<b>Название</b>: {title}\n<b>Канал</b>: {author}\n<b>Длительность</b>: {duration} секунд(а)'
 
 			await bot.send_video(message.chat.id, video, caption=title)
 			await message.answer(send_text, parse_mode='HTML')
@@ -61,7 +61,7 @@ async def unknown_cmd(message: Message, state: FSMContext):
 	await message.answer(
 		'Вы можете отправить мне ссылку на видео из YouTube, а я скачаю вам его.\n\n'
 		'1.Зайдите на видео, которое хотите скачать\n'
-		'2.Найдите кнопку поделиться\n'
+		'2.Найдите кнопку "Поделиться"\n'
 		'3.Нажмите кнопку "Скопировать"\n'
 		'4.Пришлите мне скопированную ссылку'
 		)
