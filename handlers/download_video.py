@@ -1,4 +1,5 @@
 import glob
+import os
 
 from aiogram import Router, F
 from aiogram.exceptions import TelegramEntityTooLarge
@@ -33,15 +34,17 @@ async def process_download_video(message: Message, state: FSMContext):
 
 		title, filename, author, duration = (v := video_info)['title'], v['filename'], v['author'], v['duration']
 
-		matches = glob.glob(rf'Z:/videos/{filename}.*')
+		matches = glob.glob(rf'downloaded_videos/{filename}.*')
 		if matches:
 			video = FSInputFile(matches[0])
-			send_text = f'<b>Название</b>: {title}\n<b>Канал</b>: {author}\n<b>Длительность</b>: {duration} секунд'
+			send_text = f'<b>Название</b>: {title}\n<b>Канал</b>: {author}\n<b>Длительность</b>: {duration} секунд(а)'
 
 			await bot.send_video(message.chat.id, video, caption=title)
 			await message.answer(send_text, parse_mode='HTML')
 
 			await state.clear()
+
+			os.remove(matches[0])
 		else:
 			await message.answer('Ошибка. Напишите пожалуйста разработчику [Leo Proger](https://t.me/Leo_Proger)',
 			                     parse_mode='MARKDOWN')
@@ -49,7 +52,7 @@ async def process_download_video(message: Message, state: FSMContext):
 		await message.answer('Видео не найдено')
 	except TelegramEntityTooLarge as e:
 		await message.answer(
-			'Видео слишком длинное или в большом разрешении.'
+			'Видео слишком длинное, я не могу его скачать('
 			)
 
 
@@ -58,7 +61,7 @@ async def unknown_cmd(message: Message, state: FSMContext):
 	await message.answer(
 		'Вы можете отправить мне ссылку на видео из YouTube, а я скачаю вам его.\n\n'
 		'1.Зайдите на видео, которое хотите скачать\n'
-		'2.Найдите кнопку поделиться\n'
+		'2.Найдите кнопку "Поделиться"\n'
 		'3.Нажмите кнопку "Скопировать"\n'
 		'4.Пришлите мне скопированную ссылку'
 		)
