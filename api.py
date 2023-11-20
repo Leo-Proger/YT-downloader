@@ -1,6 +1,5 @@
 import os
 import re
-from typing import Literal
 
 from yt_dlp import YoutubeDL
 
@@ -25,9 +24,7 @@ def extract_video_id(url):
 		return video_id.group(0) if video_id else None
 
 
-# TODO: Сделать асинхронным
 def download_video_api(url: str) -> dict:
-	# filename = extract_video_id(url) + VIDEO_FORMATS[quality][1]
 	filename = extract_video_id(url)
 
 	ydl_opts: dict = {
@@ -49,6 +46,6 @@ def download_video_api(url: str) -> dict:
 			'duration': info_dict.get('duration', 'No duration'),
 			}
 
-		return video_info
+	return video_info
 
 # print(download_video_api('https://youtu.be/l-sTQBr3rXY?si=b02a1bHIHmJ9s0fm'))
