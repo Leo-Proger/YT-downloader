@@ -158,7 +158,7 @@ pyflakes==3.0.1
 pygame==2.3.0
 PyGetWindow==0.0.9
 Pygments==2.15.1
-pyinstaller==5.9.0
+pyinstaller==5.13.1
 pyinstaller-hooks-contrib==2023.2
 Pympler==1.0.1
 PyMsgBox==1.0.9
