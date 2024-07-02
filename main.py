@@ -1,11 +1,12 @@
 import asyncio
 
 from aiogram import Bot, Dispatcher
+from aiogram.client.default import DefaultBotProperties
 
 from config_reader import config
 from handlers import download_video
 
-bot = Bot(token=config.TOKEN.get_secret_value(), parse_mode='html')
+bot = Bot(token=config.TOKEN.get_secret_value(), default=DefaultBotProperties(parse_mode='html'))
 
 
 async def main():
