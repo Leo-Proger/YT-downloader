@@ -28,8 +28,8 @@ def download_video_api(url: str) -> dict:
     filename = extract_video_id(url)
 
     ydl_opts: dict = {
-        'format': 'bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[height<=1080][ext=mp4]/best',
-        'outtmpl': f'downloaded_videos/{filename}.mp4',
+        'format': 'bestvideo[height<=1080][ext=mov]+bestaudio[ext=wav]/best[height<=1080][ext=mov]/best',
+        'outtmpl': f'downloaded_videos/{filename}.mov',
         'noplaylist': True,
         'max_filesize': 52428800,
     }

@@ -37,10 +37,10 @@ async def process_download_video(message: Message, state: FSMContext):
         matches = glob.glob(rf'downloaded_videos/{filename}.*')
         if matches:
             video = FSInputFile(matches[0])
-            send_text = f'<b>Название</b>: {title}\n<b>Канал</b>: {author}\n<b>Длительность</b>: {duration} секунд(а)'
+            send_text = f'<b>Название</b>: {title}\n<b>Канал</b>: {author}\n<b>Длительность</b>: {duration} сек.'
 
             await bot.send_video(message.chat.id, video, caption=title)
-            await message.answer(send_text, parse_mode='HTML')
+            await message.answer(send_text)
 
             await state.clear()
 
